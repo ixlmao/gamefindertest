@@ -358,3 +358,104 @@ p {
 .not-found-content h1 {
     color: #F38FB1;
 }
+
+hr.comment-divider {
+    border: none;
+    border-top: 1px solid #4e4949;
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+.comment-form-container,
+.comments-section {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px 25px;
+    background-color: #3B3831;
+    border-radius: 8px;
+    border: 1px solid #4e4949;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.comment-form-container h3,
+.comments-section h2 {
+    text-align: left;
+    border-bottom: 1px solid #4e4949;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: #F38FB1;
+    font-size: 1.4em;
+}
+
+.comment-form .form-group {
+    margin-bottom: 15px;
+}
+
+.comment-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #a8a39f;
+    font-weight: 500;
+}
+
+.comment-form .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4e4949;
+    border-radius: 4px;
+    background-color: #25201D;
+    color: #EFEEEC;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+.comment-form textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.comment-form button.btn-primary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    color: #EFEEEC;
+    background-color: #a74e6c;
+    transition: background-color 0.2s ease;
+}
+
+.comment-form button.btn-primary:hover {
+    background-color: #8f435c;
+}
+
+.comments-section .comment {
+    background-color: #25201D;
+    border: 1px solid #4e4949;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.comments-section .comment-text {
+    color: #EFEEEC;
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.comments-section .comment-meta {
+    font-size: 0.85em;
+    color: #a8a39f;
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 5px;
+    border-top: 1px dashed #4e4949;
+}
+
+.comments-section .comment-author {
+    font-weight: 600;
+    color: #F38FB1;
+}

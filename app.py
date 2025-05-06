@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, abort
+from flask import Flask, render_template, request, abort, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -25,9 +25,7 @@ def products():
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-
     sort_by = request.args.get('sort', 'score_desc')
-
     if sort_by == 'score_asc':
         order_clause = "ORDER BY metacritic_score ASC"
     elif sort_by == 'year_desc':
@@ -41,14 +39,11 @@ def products():
     else:
         sort_by = 'score_desc'
         order_clause = "ORDER BY metacritic_score DESC"
-
     sql_query = f"SELECT id, name, metacritic_score, release_year, image FROM games {order_clause}"
     cur.execute(sql_query)
-
     games = cur.fetchall()
     conn.close()
-
-    return render_template("games.html", games=games, current_sort=sort_by, genre_id=None, genre_name="Visas")
+    return render_template("games.html", games=games, current_sort=sort_by, genre_id=None, genre_name="All")
 
 @app.route("/genres")
 def show_genres():
@@ -65,17 +60,13 @@ def show_genre_games(genre_id):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-
     cur.execute("SELECT genre_name FROM genres WHERE id = ?", (genre_id,))
     genre_data = cur.fetchone()
-
     if genre_data is None:
         conn.close()
         abort(404)
     genre_name = genre_data['genre_name']
-
     sort_by = request.args.get('sort', 'score_desc')
-
     if sort_by == 'score_asc':
         order_clause = "ORDER BY metacritic_score ASC"
     elif sort_by == 'year_desc':
@@ -89,13 +80,10 @@ def show_genre_games(genre_id):
     else:
         sort_by = 'score_desc'
         order_clause = "ORDER BY metacritic_score DESC"
-
     sql_query = f"SELECT id, name, metacritic_score, release_year, image FROM games WHERE genre_id = ? {order_clause}"
     cur.execute(sql_query, (genre_id,))
-
     games = cur.fetchall()
     conn.close()
-
     return render_template("games.html", games=games, current_sort=sort_by, genre_id=genre_id, genre_name=genre_name)
 
 @app.route("/about")
@@ -122,12 +110,47 @@ def products_show(game_id):
         (game_id,),
     )
     game = cur.fetchone()
+
+    comments = []
+    if game:
+        cur.execute("""
+            SELECT author_name, comment_text
+            FROM comments
+            WHERE game_id = ?
+            ORDER BY id DESC
+        """, (game_id,)) 
+        comments = cur.fetchall()
+
     conn.close()
 
     if game is None:
         abort(404)
 
-    return render_template("games_show.html", game=game)
+    return render_template("games_show.html", game=game, comments=comments)
+
+@app.route("/game/<int:game_id>/add_comment", methods=['POST'])
+def add_comment(game_id):
+    author = request.form.get('author_name', 'Anonymous')
+    comment = request.form.get('comment_text')
+
+    if not comment:
+        return redirect(url_for('products_show', game_id=game_id))
+
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            INSERT INTO comments (game_id, author_name, comment_text)
+            VALUES (?, ?, ?)
+        """, (game_id, author, comment))
+        conn.commit()
+    except sqlite3.Error as e:
+        print(f"Database error: {e}")
+        conn.rollback()
+    finally:
+        conn.close()
+
+    return redirect(url_for('products_show', game_id=game_id))
 
 @app.errorhandler(404)
 def page_not_found(e):

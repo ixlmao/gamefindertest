@@ -34,9 +34,43 @@
                 {% endif %}
             </div>
         </div>
+
+        <hr class="comment-divider"> 
+
+        <div class="comment-form-container">
+            <h3>Atstāj komentāru</h3> 
+            <form action="{{ url_for('add_comment', game_id=game.id) }}" method="POST" class="comment-form">
+                <div class="form-group">
+                    <label for="author_name">Vārds (nav obligāts):</label>
+                    <input type="text" id="author_name" name="author_name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="comment_text">Komentārs:</label> 
+                    <textarea id="comment_text" name="comment_text" rows="4" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Iesniegt</button>
+            </form>
+        </div>
+
+        <div class="comments-section">
+            <h2>Komentāri</h2>
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p class="comment-text">{{ comment.comment_text }}</p>
+                        <p class="comment-meta">
+                            Publicēja <span class="comment-author">{{ comment.author_name if comment.author_name else 'Anonīms' }}</span>
+                        </p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Vēl nav komentāru.</p> 
+            {% endif %}
+        </div>
+
     {% else %}
         <h1>Spēle nav atrasta</h1>
-        <p>Spēle ko meklējat nevar atrast.</p>
+        <p>Spēle ko meklējat netika atrasta.</p>
         <a href="{{ url_for('products') }}">Atpakaļ uz spēļu sarakstu</a>
     {% endif %}
 {% endblock %}
