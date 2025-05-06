@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ genre_name }} spēles{% endblock %}
+
+{% block content %}
+    <h2>{{ genre_name }} spēles</h2>
+
+    <div class="sort-options">
+        <span>Kārtot pēc:</span>
+        {% if genre_id %}
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='score_desc') }}" class="{{ 'active' if current_sort == 'score_desc' }}">Metacritic (Desc.)</a> |
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='score_asc') }}" class="{{ 'active' if current_sort == 'score_asc' }}">Metacritic (Asc.)</a> |
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='year_desc') }}" class="{{ 'active' if current_sort == 'year_desc' }}">Gads (Jaunākais)</a> |
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='year_asc') }}" class="{{ 'active' if current_sort == 'year_asc' }}">Gads (Vecākais)</a> |
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='name_asc') }}" class="{{ 'active' if current_sort == 'name_asc' }}">Nosaukums (A-Z)</a> |
+            <a href="{{ url_for('show_genre_games', genre_id=genre_id, sort='name_desc') }}" class="{{ 'active' if current_sort == 'name_desc' }}">Nosaukums (Z-A)</a>
+        {% else %}
+            <a href="{{ url_for('products', sort='score_desc') }}" class="{{ 'active' if current_sort == 'score_desc' }}">Metacritic (Desc.)</a> |
+            <a href="{{ url_for('products', sort='score_asc') }}" class="{{ 'active' if current_sort == 'score_asc' }}">Metacritic (Asc.)</a> |
+            <a href="{{ url_for('products', sort='year_desc') }}" class="{{ 'active' if current_sort == 'year_desc' }}">Gads (Jaunākais)</a> |
+            <a href="{{ url_for('products', sort='year_asc') }}" class="{{ 'active' if current_sort == 'year_asc' }}">Gads (Vecākais)</a> |
+            <a href="{{ url_for('products', sort='name_asc') }}" class="{{ 'active' if current_sort == 'name_asc' }}">Nosaukums (A-Z)</a> |
+            <a href="{{ url_for('products', sort='name_desc') }}" class="{{ 'active' if current_sort == 'name_desc' }}">Nosaukums (Z-A)</a>
+        {% endif %}
+    </div>
+
+    {% if games %}
+        <div class="game-grid">
+            {% for game in games %}
+                <div class="game-card">
+                    <a href="{{ url_for('products_show', game_id=game.id) }}">
+                        {% if game.image %}
+                            <img src="{{ url_for('static', filename='images/games/' ~ game.image ~ '.jpg') }}" alt="{{ game.name }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="{{ game.name }}">
+                        {% endif %}
+                        <h3>{{ game.name }}</h3>
+                        <p>Metacritic: {{ game.metacritic_score if game.metacritic_score is not none else 'N/A' }}</p>
+                        {% if game.release_year %}
+                        <p>Gads: {{ game.release_year }}</p>
+                        {% endif %}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No games found matching this criteria.</p>
+    {% endif %}
+{% endblock %}

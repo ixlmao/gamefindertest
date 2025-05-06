@@ -1,0 +1,360 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #EFEEEC;
+    background-color: #25201D;
+    margin: 0;
+}
+
+h1, h2, h3 {
+    color: #EFEEEC;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #4e4949;
+    padding-bottom: 10px;
+}
+
+a {
+    color: #F38FB1;
+    text-decoration: none;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+a:hover {
+    color: #f8c4d6;
+}
+
+p {
+    color: #a8a39f;
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.site-header {
+    background-color: #3B3831;
+    padding: 15px 0;
+    border-bottom: 1px solid #4e4949;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logo-text {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #F38FB1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.main-nav a {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: 20px;
+    font-size: 0.9em;
+}
+
+.main-content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: calc(100vh - 150px);
+}
+
+.landing-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #3B3831;
+    border-radius: 8px;
+    margin: 30px auto;
+    max-width: 800px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.landing-hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #EFEEEC;
+}
+
+.landing-subtitle {
+    font-size: 1.1em;
+    color: #a8a39f;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.landing-actions a.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    color: #EFEEEC;
+}
+
+.landing-actions .btn-primary {
+    background-color: #a74e6c;
+}
+
+.landing-actions .btn-primary:hover {
+    background-color: #8f435c;
+}
+
+.landing-actions .btn-secondary {
+    background-color: #4e4949;
+}
+
+.landing-actions .btn-secondary:hover {
+    background-color: #605b5b;
+}
+
+.featured-section {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.featured-section h2 {
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+}
+
+.sort-options {
+    text-align: center;
+    margin: 0 auto 30px auto;
+    padding: 12px;
+    background-color: #3B3831;
+    border-radius: 6px;
+    max-width: fit-content;
+}
+
+.sort-options span {
+    font-weight: 600;
+    margin-right: 15px;
+    color: #a8a39f;
+}
+
+.sort-options a {
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin: 0 3px;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.sort-options a.active {
+    font-weight: 700;
+    color: #25201D;
+    background-color: #F38FB1;
+    pointer-events: none;
+    cursor: default;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 10px 0;
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+.game-card {
+    background-color: #3B3831;
+    border: 1px solid #4e4949;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    overflow: hidden;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.game-card a {
+    color: inherit;
+    display: block;
+    padding: 15px;
+}
+
+.game-card img {
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #4e4949;
+}
+
+.game-card h3 {
+    font-size: 1.15em;
+    margin-bottom: 8px;
+    color: #EFEEEC;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-card p {
+    font-size: 0.9em;
+    margin-bottom: 4px;
+    color: #a8a39f;
+}
+
+.genre-list {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.genre-list li {
+    margin-bottom: 10px;
+}
+
+.genre-list li a {
+    display: block;
+    padding: 12px 15px;
+    background-color: #3B3831;
+    border-radius: 5px;
+    border: 1px solid #4e4949;
+    font-weight: 500;
+    text-align: center;
+    color: #F38FB1;
+}
+
+.genre-list li a:hover {
+    background-color: #4e4949;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    color: #f8c4d6;
+}
+
+.game-detail-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: #3B3831;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border: 1px solid #4e4949;
+}
+
+.game-detail-image {
+    flex: 1 1 300px; 
+    max-width: 400px; 
+    min-width: 250px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px;
+    overflow: hidden;
+}
+
+.game-detail-image img {
+    width: 100%;  
+    height: auto;
+    max-height: 550px; 
+    object-fit: contain; 
+    border-radius: 6px;
+    border: 1px solid #4e4949;
+    display: block; 
+}
+
+.game-detail-info {
+    flex: 2 1 400px;
+}
+
+.game-detail-info h1 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #F38FB1;
+    border-bottom: 1px solid #4e4949;
+    padding-bottom: 10px;
+}
+
+.game-detail-info p {
+    margin-bottom: 10px;
+    color: #EFEEEC;
+}
+
+.game-publisher, .game-release, .game-score {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #a8a39f;
+}
+
+.game-description {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #4e4949;
+}
+
+.game-description h2 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #EFEEEC;
+    border-bottom: none;
+}
+
+.game-description p {
+    color: #a8a39f;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 8px 15px;
+    background-color: #4e4949;
+    color: #EFEEEC;
+    border-radius: 4px;
+}
+
+.back-link:hover {
+    background-color: #605b5b;
+}
+
+.not-found-content {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.not-found-content h1 {
+    color: #F38FB1;
+}

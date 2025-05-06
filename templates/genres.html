@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Browse by Genre{% endblock %}
+
+{% block content %}
+    <h2>Pārlūkot spēles pēc žanra</h2>
+
+    {% if genres %}
+        <ul class="genre-list">
+            {% for genre in genres %}
+                <li><a href="{{ url_for('show_genre_games', genre_id=genre.id) }}">{{ genre.genre_name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No genres found.</p>
+    {% endif %}
+{% endblock %}

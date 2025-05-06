@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ game.name if game else 'Game Details' }}{% endblock %}
+
+{% block content %}
+    {% if game %}
+        <div class="game-detail-container">
+            <div class="game-detail-image">
+                {% if game.image %}
+                    <img src="{{ url_for('static', filename='images/games/' ~ game.image ~ '.jpg') }}" alt="{{ game.name }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="{{ game.name }}">
+                {% endif %}
+            </div>
+
+            <div class="game-detail-info">
+                <h1>{{ game.name }}</h1>
+
+                {% if game.publisher_name %}
+                    <p class="game-publisher">Izdevēji: {{ game.publisher_name }}</p>
+                {% endif %}
+
+                {% if game.release_year %}
+                    <p class="game-release">Gads: {{ game.release_year }}</p>
+                {% endif %}
+
+                <p class="game-score">Metacritic: {{ game.metacritic_score if game.metacritic_score is not none else 'N/A' }}</p>
+
+                {% if game.description %}
+                    <div class="game-description">
+                        <h2>Apraksts</h2>
+                        <p>{{ game.description }}</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% else %}
+        <h1>Spēle nav atrasta</h1>
+        <p>Spēle ko meklējat nevar atrast.</p>
+        <a href="{{ url_for('products') }}">Atpakaļ uz spēļu sarakstu</a>
+    {% endif %}
+{% endblock %}
